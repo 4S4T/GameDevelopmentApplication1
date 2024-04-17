@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fcc4c6d8-f52b-4937-957a-998164a0f6ff}</ProjectGuid>
-    <RootNamespace>Sample</RootNamespace>
+    <ProjectGuid>{9ef39864-4954-4407-87be-3c8fcd7479a9}</ProjectGuid>
+    <RootNamespace>My0202</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -133,15 +133,13 @@
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
-    <ClCompile Include="Objects\Player\Player.cpp" />
-    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Objects\Player.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\GameObject.h" />
-    <ClInclude Include="Objects\Player\Player.h" />
-    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Objects\Player.h" />
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>

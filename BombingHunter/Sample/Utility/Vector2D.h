@@ -3,10 +3,11 @@
 class Vector2D
 {
 public:
-	float x;
-	float y;
+	float x; //x座標
+	float y; //y座標
 
 public:
+	//コンストラクタ
 	Vector2D();
 	Vector2D(float scalar);
 	Vector2D(float mx, float my);

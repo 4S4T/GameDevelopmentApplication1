@@ -8,51 +8,63 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//ウィンドウモードで起動
 	ChangeWindowMode(TRUE);
 
+	//ウィンドウサイズを設定
+	SetGraphMode(640, 480, 32);
+
 	//DXライブラリの初期化
 	if (DxLib_Init() == -1)
 	{
 		return -1;
 	}
 
+	//ローカル変数定義
+	Scene* scene = new Scene();
+	int result = 0;
+
 	//描画先指定
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//オブジェクトの生成
-	GameObject* object1 = new GameObject();
-	Player* object2 = new Player();
 
-	//初期化処理
-	object1->Initialize();
-	object2->Initialize();
-
-	//メインループ
-	while (ProcessMessage() != -1 && InputControl::GetKeyUp(KEY_INPUT_ESCAPE) == false)
+	try
 	{
+		//シーン初期化
+		scene->Initialize();
 
-		//入力機能：更新処理
-		InputControl::Update();
-
-		//更新処理
-		object1->Update();
-		object2->Update();
-
-		//画面初期化処理
-		ClearDrawScreen();
-
-		//描画
-		object1->Draw();
-		object2->Draw();
-
-		//裏画面の内容を表画面に反映
-		ScreenFlip();
+		//メインループ
+		while (ProcessMessage() != -1 && CheckHitKey(KEY_INPUT_ESCAPE) != TRUE)
+		{
+			//入力機能の更新
+			InputControl::Update();
+			//シーンの更新処理
+			scene->Update();
+			//画面の初期化
+			ClearDrawScreen();
+			//シーンの描画処理
+			scene->Draw();
+			//裏画面の内容を表画面に反映する
+			ScreenFlip();
+		}
+	}
+	catch (const char* error_log)
+	{
+		//エラー情報をLog.txtに出力する
+		OutputDebugString(error_log);
+		//異常状態に変更する
+		result = -1;
 	}
 
-	//削除
-	delete object1;
-	delete object2;
+	//シーン情報の削除する
+	if (scene != nullptr)
+	{
+		scene->Finalize();
+		delete scene;
+		scene = nullptr;
+	}
 
-	//終了
+	//DXライブラリの終了時処理
 	DxLib_End();
-
-	return 0;
+	//終了状態を通知
+	return result;
 }
+
+	
